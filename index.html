@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>朋克养生社 - 一边放纵，一边补救</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #F59E0B;
+            --secondary-color: #10B981;
+            --dark-color: #1F2937;
+            --light-color: #F3F4F6;
+            --text-color: #4B5563;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            color: var(--text-color);
+            background-color: #fff;
+            line-height: 1.6;
+        }
+        .navbar {
+            background-color: #fff !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 1rem 0;
+        }
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color) !important;
+        }
+        .navbar-brand i {
+            margin-right: 0.5rem;
+        }
+        .nav-link {
+            color: var(--dark-color) !important;
+            font-weight: 500;
+            margin: 0 0.8rem;
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+        .btn-primary {
+            background-color: var(--primary-color) !important;
+            border: none !important;
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #D97706 !important;
+            transform: translateY(-2px);
+        }
+        .carousel-item {
+            height: 80vh;
+            min-height: 400px;
+            position: relative;
+        }
+        .carousel-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3));
+            z-index: 1;
+        }
+        .carousel-item img {
+            object-fit: cover;
+            height: 100%;
+        }
+        .carousel-caption {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            text-align: left;
+            width: 80%;
+        }
+        .carousel-caption h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        .carousel-caption p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        .data-section {
+            padding: 5rem 0;
+            background-color: var(--light-color);
+        }
+        .data-card {
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            height: 100%;
+        }
+        .data-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .data-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .data-card .num {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+        .group-section {
+            padding: 5rem 0;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .group-card {
+            border: 1px solid #E5E7EB;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 100%;
+            transition: all 0.3s;
+        }
+        .group-card:hover {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-color: var(--primary-color);
+        }
+        .group-card .card-header {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 1rem;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        .group-card .card-body {
+            padding: 1.5rem;
+        }
+        .group-card .card-text {
+            margin-bottom: 1rem;
+        }
+        .group-card .badge {
+            background-color: var(--secondary-color);
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .strategy-section {
+            padding: 5rem 0;
+            background-color: var(--light-color);
+        }
+        .strategy-card {
+            background-color: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: 100%;
+            transition: all 0.3s;
+        }
+        .strategy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .strategy-card img {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+        .strategy-card .card-body {
+            padding: 1.5rem;
+        }
+        .strategy-card .card-title {
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 0.8rem;
+        }
+        .product-section {
+            padding: 5rem 0;
+        }
+        .product-card {
+            border: 1px solid #E5E7EB;
+            border-radius: 15px;
+            overflow: hidden;
+            text-align: center;
+            padding: 1.5rem;
+            height: 100%;
+            transition: all 0.3s;
+        }
+        .product-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .product-card img {
+            height: 120px;
+            width: 120px;
+            object-fit: contain;
+            margin: 0 auto 1rem;
+        }
+        .product-card .card-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .product-card .price {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .product-category {
+            font-size: 0.85rem;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+        .all-category-section {
+            padding: 5rem 0;
+            background-color: var(--light-color);
+        }
+        .category-box {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            padding: 24px 28px;
+            cursor: pointer;
+        }
+        .category-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .category-title:before {
+            content: "";
+            display: inline-block;
+            width: 6px;
+            height: 22px;
+            background: var(--primary-color);
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .product-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px 0;
+            border-bottom: 1px dashed #eee;
+        }
+        .product-item img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+        .product-info {
+            flex: 1;
+        }
+        .product-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .product-desc {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .collapse {
+            margin-top: 20px;
+        }
+        .conclusion-section {
+            padding: 5rem 0;
+            background-color: var(--dark-color);
+            color: #fff;
+        }
+        .conclusion-section .section-title h2,
+        .conclusion-section .section-title p {
+            color: #fff;
+        }
+        .conclusion-list {
+            list-style: none;
+            padding: 0;
+        }
+        .conclusion-list li {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+        .conclusion-list li::before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+            top: 0.2rem;
+        }
+        .footer {
+            padding: 3rem 0;
+            background-color: #111827;
+            color: #9CA3AF;
+        }
+        .footer h5 {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        .footer-links a {
+            color: #9CA3AF;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background-color: #374151;
+            color: #fff;
+            border-radius: 50%;
+            margin-right: 0.8rem;
+            transition: all 0.3s;
+        }
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #374151;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#"><i class="fas fa-leaf"></i>朋克养生社</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="#home">首页</a></li>
+                <li class="nav-item"><a class="nav-link" href="#data">核心数据</a></li>
+                <li class="nav-item"><a class="nav-link" href="#group">群体分析</a></li>
+                <li class="nav-item"><a class="nav-link" href="#strategy">养生攻略</a></li>
+                <li class="nav-item"><a class="nav-link" href="#product">好物推荐</a></li>
+                <li class="nav-item"><a class="nav-link" href="#allcategory">全品类库</a></li>
+                <li class="nav-item"><a class="nav-link" href="#conclusion">研究结论</a></li>
+                <li class="nav-item"><a class="btn btn-primary" href="#">加入我们</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="home" class="carousel slide" data-bs-ride="carousel" style="padding-top: 76px;">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="https://picsum.photos/id/237/1920/1080" class="d-block w-100" alt="朋克养生">
+            <div class="carousel-caption d-none d-md-block">
+                <h1>熬最晚的夜，敷最贵的面膜</h1>
+                <p>当代大学生朋克养生指南，一边放纵生活，一边科学补救</p>
+                <a href="#strategy" class="btn btn-primary btn-lg">查看养生攻略</a>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="https://picsum.photos/id/42/1920/1080" class="d-block w-100" alt="轻养生">
+            <div class="carousel-caption d-none d-md-block">
+                <h1>轻量化养生，适配大学生活</h1>
+                <p>月均100元以内，护肤/个护/饮食类轻养生</p>
+                <a href="#product" class="btn btn-primary btn-lg">推荐好物</a>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="https://picsum.photos/id/96/1920/1080" class="d-block w-100" alt="群体画像">
+            <div class="carousel-caption d-none d-md-block">
+                <h1>精准匹配你的养生类型</h1>
+                <p>三大朋克养生群体，找到你的专属方式</p>
+                <a href="#group" class="btn btn-primary btn-lg">群体分析</a>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#home" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#home" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+
+<section id="data" class="data-section">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="data-card">
+                    <i class="fas fa-users"></i>
+                    <div class="num">91.76%</div>
+                    <div class="desc">大学生朋克养生普及率</div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="data-card">
+                    <i class="fas fa-youtube"></i>
+                    <div class="num">47.97%</div>
+                    <div class="desc">主要信息来源-短视频平台</div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="data-card">
+                    <i class="fas fa-shopping-cart"></i>
+                    <div class="num">≤100元</div>
+                    <div class="desc">月均养生消费金额</div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="data-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <div class="num">43.90%</div>
+                    <div class="desc">主要购买渠道-社交电商</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="group" class="group-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>三大朋克养生群体画像</h2>
+            <p>基于武汉大学生朋克养生研究，通过K-means聚类分析，划分出三类典型消费群体</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="group-card">
+                    <div class="card-header">高频低额补救党 <span class="float-end">50.68%</span></div>
+                    <div class="card-body">
+                        <p class="card-text">市场主力群体，主打「小额度、高频次、即时补救」，适配熬夜、久坐等日常不良习惯。</p>
+                        <span class="badge">月均＜100元</span>
+                        <span class="badge">每月3-5次消费</span>
+                        <span class="badge">护肤/个护为主</span>
+                        <span class="badge">即时补救</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="group-card">
+                    <div class="card-header">社交跟风尝鲜党 <span class="float-end">31.36%</span></div>
+                    <div class="card-body">
+                        <p class="card-text">受主观规范影响最大，消费行为由社交圈层、博主KOL带动，注重产品社交属性。</p>
+                        <span class="badge">易被KOL种草</span>
+                        <span class="badge">注重颜值设计</span>
+                        <span class="badge">尝鲜型消费</span>
+                        <span class="badge">社交属性强</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mx-auto">
+                <div class="group-card">
+                    <div class="card-header">低频高额保健党 <span class="float-end">17.97%</span></div>
+                    <div class="card-body">
+                        <p class="card-text">消费能力最强，决策更理性，仅在有明确健康需求时投入，注重产品功效。</p>
+                        <span class="badge">月均＞200元</span>
+                        <span class="badge">低频高客单</span>
+                        <span class="badge">保健/器械为主</span>
+                        <span class="badge">理性决策</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="strategy" class="strategy-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>大学生专属朋克养生攻略</h2>
+            <p>贴合校园生活全场景，低门槛、便捷化的轻养生方式</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="strategy-card">
+                    <img src="https://picsum.photos/id/106/600/400" alt="熬夜补救">
+                    <div class="card-body">
+                        <h5 class="card-title">熬夜党急救攻略</h5>
+                        <p class="card-text">凌晨赶作业后，5分钟快速补救：急救面膜+熬夜精华+护眼贴，搭配枸杞菊花茶。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="strategy-card">
+                    <img src="https://picsum.photos/id/292/600/400" alt="久坐补救">
+                    <div class="card-body">
+                        <h5 class="card-title">久坐备考养生法</h5>
+                        <p class="card-text">图书馆久坐备考，颈椎/腰背酸痛补救：迷你按摩仪+护颈贴，每小时起身拉伸。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="strategy-card">
+                    <img src="https://picsum.photos/id/312/600/400" alt="聚餐补救">
+                    <div class="card-body">
+                        <h5 class="card-title">聚餐放纵补救攻略</h5>
+                        <p class="card-text">火锅/烧烤聚餐后，去火解腻：清热去火茶+膳食纤维片，减少高热量负担。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section id="product" class="product-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>高性价比朋克养生好物</h2>
+                <p>基于研究结论，精选护肤、个护、饮食、保健、器械类核心产品</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="product-card">
+                        <img src="https://s41.ax1x.com/2026/03/30/pe3KPx0.png" alt="pe3KPx0.png" border="0" /></a>
+                        <h5 class="card-title">熬夜急救面膜</h5>
+                        <div class="product-category">护肤类</div>
+                        <div class="price">¥29.9/5片</div>
+                        <a href="#" class="btn btn-sm btn-primary">立即查看</a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="product-card">
+                        <img src="https://s41.ax1x.com/2026/03/30/pe3QxaD.png" alt="pe3QxaD.png" border="0" /></a>
+                        <h5 class="card-title">熬夜修护精华液</h5>
+                        <div class="product-category">护肤类</div>
+                        <div class="price">¥49.9/30ml</div>
+                        <a href="#" class="btn btn-sm btn-primary">立即查看</a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="product-card">
+                        <img src="https://s41.ax1x.com/2026/03/30/pe3KpPs.png" alt="pe3KpPs.png" border="0" /></a>
+                        <h5 class="card-title">恒温蒸汽眼罩</h5>
+                        <div class="product-category">个护类</div>
+                        <div class="price">¥19.9/10片</div>
+                        <a href="#" class="btn btn-sm btn-primary">立即查看</a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="product-card">
+                        <img src="https://s41.ax1x.com/2026/03/30/pe3uxaQ.png" alt="pe3uxaQ.png" border="0" /></a>
+                        <h5 class="card-title">控油防脱洗发水</h5>
+                        <div class="product-category">个护类</div>
+                        <div class="price">¥49.9/500ml</div>
+                        <a href="#" class="btn btn-sm btn-primary">立即查看</a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="product-card">
+                        <img src="https://s3.bmp.ovh/2026/03/30/73Cf7fI0.png" alt="mmexport1774848301637.png" />
+                        <h5 class="card-title">艾草护颈贴</h5>
+                        <div class="product-category">个护类</div>
+                        <div class="price">¥15.9/10片</div>
+                        <a href="#" class="btn btn-sm btn-primary">立即查看</a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="product-card">
+                        <img src="https://s41.ax1x.com/2026/03/30/pe3KMxx.png" alt="pe3KMxx.png" border="0" /></a>
+                        <h5 class="card-title">枸杞菊花茶包</h5>
+                        <div class="product-category">饮食类</div>
+                        <div class="price">¥9.9/20包</div>
+                        <a href="#" class="btn btn-sm btn-primary">立即查看</a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="product-card">
+                        <img src="https://s41.ax1x.com/2026/03/30/pe3uz5j.png" alt="pe3uz5j.png" border="0" /></a>
+                        <h5 class="card-title">便携益生菌</h5>
+                        <div class="product-category">饮食类</div>
+                        <div class="price">¥39.9/20条</div>
+                        <a href="#" class="btn btn-sm btn-primary">立即查看</a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="product-card">
+                        <img src="https://s3.bmp.ovh/2026/03/30/2816yaiW.png" alt="mmexport1774848145065.png" />
+                        <h5 class="card-title">九蒸九晒黑芝麻丸</h5>
+                        <div class="product-category">饮食类</div>
+                        <div class="price">¥29.9/10颗</div>
+                        <a href="#" class="btn btn-sm btn-primary">立即查看</a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="product-card">
+                        <img src="https://s41.ax1x.com/2026/03/30/pe3QvVO.png" alt="pe3QvVO.png" border="0" /></a>
+                        <h5 class="card-title">白芸豆膳食纤维片</h5>
+                        <div class="product-category">饮食类</div>
+                        <div class="price">¥34.9/60片</div>
+                        <a href="#" class="btn btn-sm btn-primary">立即查看</a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="product-card">
+                        <img src="https://s3.bmp.ovh/2026/03/30/gEEl0Hu8.png" alt="mmexport1774848301515.png" />
+                        <h5 class="card-title">蓝莓叶黄素软糖</h5>
+                        <div class="product-category">保健类</div>
+                        <div class="price">¥39.9/30粒</div>
+                        <a href="#" class="btn btn-sm btn-primary">立即查看</a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="product-card">
+                        <img src="https://s3.bmp.ovh/2026/03/30/dRayTvTz.png" alt="mmexport1774848301671.png" />
+                        <h5 class="card-title">褪黑素助眠软糖</h5>
+                        <div class="product-category">保健类</div>
+                        <div class="price">¥45.9/30粒</div>
+                        <a href="#" class="btn btn-sm btn-primary">立即查看</a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mx-auto">
+                    <div class="product-card">
+                        <img src="https://s41.ax1x.com/2026/03/30/pe3uvVg.png" alt="pe3uvVg.png" border="0" /></a>
+                        <h5 class="card-title">迷你颈椎按摩仪</h5>
+                        <div class="product-category">器械类</div>
+                        <div class="price">¥59.9/台</div>
+                        <a href="#" class="btn btn-sm btn-primary">立即查看</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section id="allcategory" class="all-category-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>朋克养生全品类产品库</h2>
+            <p>点击分类展开/收起，每个产品均带图片+详细介绍</p>
+        </div>
+
+        <!-- 护肤类 -->
+        <div class="category-box" data-bs-toggle="collapse" data-bs-target="#collapseSkin">
+            <div class="category-title">
+                <span>护肤类（点击展开）</span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <div class="collapse" id="collapseSkin">
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/1/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">熬夜急救面膜</div>
+                        <div class="product-desc">针对熬夜肌，含高浓度咖啡因、烟酰胺和抗氧化成分，通宵后快速消除“班味”，提亮暗沉肤色。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/2/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">防蓝光防晒隔离乳</div>
+                        <div class="product-desc">防晒+防蓝光，质地轻薄，对抗熬夜刷手机、长时间用电脑带来的光老化与色素沉淀。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/3/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">玻尿酸次抛精华</div>
+                        <div class="product-desc">即开即用、无菌便携，高浓度玻尿酸满足成分党，适合办公室、差旅随时急救补水。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/4/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">抗糖抗氧口服精华</div>
+                        <div class="product-desc">外用抗糖精华液主打外防内养，针对奶茶续命人群，抑制糖化，改善暗黄。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/5/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">早C晚A套装</div>
+                        <div class="product-desc">早维C抗氧化提亮，晚A醇修护抗老，符合年轻人高效精简护肤需求。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/6/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">CBD大麻叶舒缓面膜</div>
+                        <div class="product-desc">添加工业大麻叶提取物，褪红舒缓敏感，适合熬夜压力大导致的皮肤情绪化问题。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/8/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">毛孔吸尘器清洁泥膜</div>
+                        <div class="product-desc">高岭土吸附油脂，主打“吃进去的热量，吸出来的油脂”，防止爆痘。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/9/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">熬夜眼霜</div>
+                        <div class="product-desc">带陶瓷按摩头或冰感设计，咖啡因+胜肽，改善黑眼圈、浮肿、熊猫眼。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/10/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">益生菌平衡护肤水</div>
+                        <div class="product-desc">添加乳酸菌发酵产物，调节熬夜后皮肤微生态，增强屏障，减少敏感反复。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/11/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">便携式洗脸巾</div>
+                        <div class="product-desc">纯棉无菌一次性使用，解决懒得洗脸、毛巾细菌多易长痘问题。</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 个护类 -->
+        <div class="category-box" data-bs-toggle="collapse" data-bs-target="#collapseBody">
+            <div class="category-title">
+                <span>个护类（点击展开）</span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <div class="collapse" id="collapseBody">
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/21/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">防脱固发洗发水</div>
+                        <div class="product-desc">生姜、何首乌、咖啡因成分，减少断发、强韧发根，缓解英年早秃焦虑。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/22/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">中药草本足浴包</div>
+                        <div class="product-desc">艾草、老姜、红花等，边泡脚边打游戏，逼出体内湿寒，适合又虚又寒人群。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/23/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">水牙线/冲牙器</div>
+                        <div class="product-desc">高压水流冲净牙缝残渣，保护经常吃夜宵、喝奶茶又不爱刷牙人群的牙齿。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/24/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">香氛助眠沐浴露</div>
+                        <div class="product-desc">薰衣草、雪松精油，洗去班味，用嗅觉帮助熬夜党放松入睡。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/25/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">身体素颜霜</div>
+                        <div class="product-desc">提亮+防晒，一抹即白，懒人防晒养生，物理层面快速变美。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/26/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">磨砂膏</div>
+                        <div class="product-desc">粗颗粒+精油，物理去角质，改善熬夜后皮肤粗糙暗沉。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/27/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">免洗干发喷雾</div>
+                        <div class="product-desc">稻米淀粉吸附油脂，熬夜早晨急救，快速去油维持蓬松。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/28/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">颈椎热敷贴</div>
+                        <div class="product-desc">持续8小时发热，贴于脖颈，边玩手机边理疗，缓解低头族僵硬。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/29/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">漱口水条</div>
+                        <div class="product-desc">便携条状，夜宵后即时清洁口腔，去口气、防蛀牙与胃酸反流异味。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/30/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">蒸汽眼罩</div>
+                        <div class="product-desc">40℃恒温自发热，缓解眼干涩疲劳，遮光助眠，熬夜党必备。</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 饮食类 -->
+        <div class="category-box" data-bs-toggle="collapse" data-bs-target="#collapseFood">
+            <div class="category-title">
+                <span>饮食类（点击展开）</span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <div class="collapse" id="collapseFood">
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/41/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">即食花胶/鲜炖燕窝</div>
+                        <div class="product-desc">开盖即食，高蛋白低脂肪，熬夜后皮肤修复，满足懒人滋补。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/42/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">黑芝麻丸</div>
+                        <div class="product-desc">九蒸九晒零食化，以黑养黑防脱，重油外卖后来一颗，心理安慰拉满。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/43/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">酵素果冻</div>
+                        <div class="product-desc">促肠道蠕动、分解油脂，主打大餐后悔药，解决久坐怕胖问题。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/44/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">养生小甜水</div>
+                        <div class="product-desc">红豆薏米水、红枣枸杞水、刺梨原浆，0糖0卡替代奶茶，边喝边祛湿。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/45/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">熬夜水</div>
+                        <div class="product-desc">人参、菊花、大枣瓶装饮品，酒吧便利店常见，喝完继续嗨。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/46/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">高蛋白薯片/蛋白棒</div>
+                        <div class="product-desc">蛋白替代淀粉，低卡高纤，满足减脂期对垃圾食品的渴望。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/47/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">功能性软糖</div>
+                        <div class="product-desc">褪黑素、维生素、生物素做成软糖，吃药变吃糖，好坚持不抗拒。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/48/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">液体沙拉</div>
+                        <div class="product-desc">多种果蔬酵素液体代餐，一口补足蔬菜，解决饮食结构单一。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/49/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">姜黄奶/黄金奶</div>
+                        <div class="product-desc">姜黄+肉桂+植物奶，抗炎暖身，改善熬夜长痘、喉咙痛。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/50/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">阿胶固元糕</div>
+                        <div class="product-desc">传统阿胶零食化，独立包装补气血，改善脆皮打工人手脚冰凉。</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 保健类 -->
+        <div class="category-box" data-bs-toggle="collapse" data-bs-target="#collapseHealth">
+            <div class="category-title">
+                <span>保健类（点击展开）</span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <div class="collapse" id="collapseHealth">
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/61/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">复合维生素</div>
+                        <div class="product-desc">一片补全微量元素，弥补外卖营养缺口，基础查漏补缺型养生。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/62/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">辅酶Q10</div>
+                        <div class="product-desc">保护心脏，缓解长期熬夜心悸心慌，被视为熬夜党救命稻草。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/63/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">护肝片</div>
+                        <div class="product-desc">奶蓟草、水飞蓟，针对饮酒、熬夜、重油饮食，熬夜护肝神器。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/64/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">褪黑素软糖</div>
+                        <div class="product-desc">调节睡眠节律，解决晚上不睡早上不起的昼夜颠倒问题。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/65/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">益生菌</div>
+                        <div class="product-desc">调节肠道菌群，改善外卖不规律导致的便秘或腹泻。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/66/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">鱼油</div>
+                        <div class="product-desc">Omega-3抗炎护眼降血脂，适合长期屏幕党、脑力劳动者。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/67/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">维生素D滴剂</div>
+                        <div class="product-desc">办公室晒不到太阳必备，促进钙吸收，改善情绪低落。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/68/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">胶原蛋白肽饮</div>
+                        <div class="product-desc">小分子易吸收，改善熬夜皮肤松弛、关节弹响。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/69/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">叶黄素酯片</div>
+                        <div class="product-desc">保护黄斑区，缓解视疲劳，被称为电子屏眼黄金。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/70/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">氨基葡萄糖软骨素</div>
+                        <div class="product-desc">保护关节颈椎，针对久坐或运动磨损，工位钉子户必备。</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 器械类 -->
+        <div class="category-box" data-bs-toggle="collapse" data-bs-target="#collapseDevice">
+            <div class="category-title">
+                <span>器械类（点击展开）</span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <div class="collapse" id="collapseDevice">
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/81/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">筋膜枪</div>
+                        <div class="product-desc">高频振动深层按摩，放松久坐斜方肌、腰背僵硬。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/82/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">颈椎按摩仪</div>
+                        <div class="product-desc">挂脖式脉冲/揉捏，边工作边按摩，改善低头族颈椎问题。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/83/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">智能手表/手环</div>
+                        <div class="product-desc">心率、血氧、睡眠监测，提醒站立，实现可视化养生。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/84/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">眼部按摩仪</div>
+                        <div class="product-desc">气囊揉压+热敷，模拟眼保健操，午休睡前缓解干涩。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/85/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">腰部靠垫按摩器</div>
+                        <div class="product-desc">加热震动支撑腰椎，办公椅使用，缓解长期伏案腰肌劳损。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/86/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">刮痧板</div>
+                        <div class="product-desc">传统/电动刮痧，配合精油出痧排毒，祛湿缓解肌肉酸痛。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/87/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">泡脚桶</div>
+                        <div class="product-desc">恒温加热、自动按摩，升级传统泡脚为全自动足疗。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/88/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">艾灸贴/坐灸仪</div>
+                        <div class="product-desc">艾热温灸穴位，改善宫寒痛经胃寒，空调房温补神器。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/89/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">人体工学腰托</div>
+                        <div class="product-desc">物理支撑护腰椎，防止久坐突出，被动养生基础防护。</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <img src="https://picsum.photos/id/90/300/300" alt="">
+                    <div class="product-info">
+                        <div class="product-name">升降桌</div>
+                        <div class="product-desc">站坐交替办公，改善血液循环，降低颈椎腰椎压力。</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+    <section id="conclusion" class="conclusion-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>朋克养生核心研究结论</h2>
+                <p>基于590份武汉大学生有效问卷+京东电商评论数据分析</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 mx-auto">
+                    <ul class="conclusion-list">
+                        <li>朋克养生在大学生群体中普及率达91.76%，是主流健康补救方式。</li>
+                        <li>感知行为控制是消费意向核心驱动因素，产品便捷性、可获取性是关键。</li>
+                        <li>大学生养生消费呈“轻养生”特征，月均支出主要集中在100元以内。</li>
+                        <li>短视频/社交平台是主要信息渠道，社交电商/传统电商是核心购买渠道。</li>
+                        <li>行为态度、主观规范、感知行为控制均显著正向影响消费意向。</li>
+                        <li>计划行为理论（TPB）可有效解释朋克养生消费行为。</li>
+                        <li>用户对朋克养生产品评价整体正向但两极分化，性价比是满意度核心。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <h5><i class="fas fa-leaf"></i>朋克养生社</h5>
+                    <p>基于武汉大学生朋克养生研究报告打造，专注为Z世代提供轻量化、高性价比的朋克养生解决方案。</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                        <a href="#"><i class="fab fa-douyin"></i></a>
+                        <a href="#"><i class="fab fa-xiaohongshu"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5>养生攻略</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">熬夜补救</a></li>
+                        <li><a href="#">久坐养生</a></li>
+                        <li><a href="#">聚餐解腻</a></li>
+                        <li><a href="#">脱发防护</a></li>
+                        <li><a href="#">护眼攻略</a></li>
+                        <li><a href="#">情绪舒缓</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5>产品分类</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">护肤类</a></li>
+                        <li><a href="#">个护类</a></li>
+                        <li><a href="#">饮食类</a></li>
+                        <li><a href="#">保健类</a></li>
+                        <li><a href="#">器械类</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5>关于我们</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">研究报告</a></li>
+                        <li><a href="#">群体分析</a></li>
+                        <li><a href="#">合作联系</a></li>
+                        <li><a href="#">加入我们</a></li>
+                        <li><a href="#">隐私政策</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 朋克养生社 版权所有 | 基于《武汉市大学生朋克养生行为机制与消费意愿研究》打造</p>
+            </div>
+        </div>
+    </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
